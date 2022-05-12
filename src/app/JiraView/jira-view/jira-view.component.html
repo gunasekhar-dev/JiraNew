@@ -29,17 +29,21 @@
     </div>
     <div class="my-class font-italic">
       <button type="button" class="btn btn-primary" data-bs-toggle="button"
-      autocomplete="off" (newItem)="onAdd()">Add List</button>
+      autocomplete="off" (click)="onAdd()">Add List</button>
+      <div *ngIf="addNewBox">
+        <input type="text" [(ngModel)]="statusText">
+        <button type="button" class="btn btn-primary" (click)="addStatus()">Add</button>
+      </div>
 
     <div class="board">
       <div class="board-bar">
-        <p class="board-name">{{ board.name }}</p>
+        <p class="board-name">{{ dynamicBoard?.name }}</p>
       </div>
 
       <div class="board-wrapper">
 
         <div class="board-columns" cdkDropListGroup>
-          <div class="board-column" *ngFor="let column of board.columns">
+          <div class="board-column" *ngFor="let column of dynamicBoard?.columns ; let i=index">
 
             <div class="column-title">
               {{ column.name }}
@@ -54,13 +58,14 @@
                 {{ item }}
               </div>
             </div>
+            <div *ngIf="addNewTask && activeColumnIndex==i">
+              <input type="text" [(ngModel)]="taskText">
+              <button type="button" class="btn btn-primary" (click)="onCreateTask(column)">Add New task</button>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="button"
+                autocomplete="off" (click)="addTaskName(i)">+</button>
           </div>
-
         </div>
-
       </div>
-
     </div>
-
-
   </div>
