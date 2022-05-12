@@ -1,0 +1,66 @@
+<!-- <div class="container font-italic">
+  <br />
+  <div class="heading">
+    <h1 class="Header">Jira Board</h1>
+  </div>
+  <hr>
+  <br />
+  <div class="my-class font-italic">
+    <button type="button" class="btn btn-primary" data-bs-toggle="button"
+    autocomplete="off" (click)="onAdd()">Add List</button>
+
+
+    <div id="div1" *ngIf="addNew">
+      <h5>To do </h5></div>
+    <div id="div2">
+      <h5>inprogress </h5>
+    </div>
+    <div id="div3" >
+      <h5>complete </h5>
+    </div>
+    <div id="div4">
+      <h5>add</h5>
+    </div>
+  </div>
+  </div> -->
+  <div class="root">
+    <div class="heading">
+      <h1 class="Header">Jira Board</h1>
+    </div>
+    <div class="my-class font-italic">
+      <button type="button" class="btn btn-primary" data-bs-toggle="button"
+      autocomplete="off" (newItem)="onAdd()">Add List</button>
+
+    <div class="board">
+      <div class="board-bar">
+        <p class="board-name">{{ board.name }}</p>
+      </div>
+
+      <div class="board-wrapper">
+
+        <div class="board-columns" cdkDropListGroup>
+          <div class="board-column" *ngFor="let column of board.columns">
+
+            <div class="column-title">
+              {{ column.name }}
+              <hr>
+            </div>
+
+            <div class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)">
+              <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+                {{ item }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
