@@ -34,14 +34,13 @@
         <input type="text" [(ngModel)]="statusText">
         <button type="button" class="btn btn-primary" (click)="addStatus()">Add</button>
       </div>
+      <button type="button" class="btn btn-primary"  (click)="onSave()">save</button>
 
     <div class="board">
       <div class="board-bar">
         <p class="board-name">{{ dynamicBoard?.name }}</p>
       </div>
-
       <div class="board-wrapper">
-
         <div class="board-columns" cdkDropListGroup>
           <div class="board-column" *ngFor="let column of dynamicBoard?.columns ; let i=index">
 
