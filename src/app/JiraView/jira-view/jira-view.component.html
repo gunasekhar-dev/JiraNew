@@ -1,40 +1,15 @@
-<!-- <div class="container font-italic">
-  <br />
+<div class="root">
   <div class="heading">
     <h1 class="Header">Jira Board</h1>
   </div>
-  <hr>
-  <br />
   <div class="my-class font-italic">
-    <button type="button" class="btn btn-primary" data-bs-toggle="button"
-    autocomplete="off" (click)="onAdd()">Add List</button>
-
-
-    <div id="div1" *ngIf="addNew">
-      <h5>To do </h5></div>
-    <div id="div2">
-      <h5>inprogress </h5>
+    <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" (click)="onAdd()">Add
+      List</button>
+    <div *ngIf="addNewBox">
+      <input type="text" [(ngModel)]="statusText">
+      <button type="button" class="btn btn-primary" (click)="addStatus()">Add</button>
     </div>
-    <div id="div3" >
-      <h5>complete </h5>
-    </div>
-    <div id="div4">
-      <h5>add</h5>
-    </div>
-  </div>
-  </div> -->
-  <div class="root">
-    <div class="heading">
-      <h1 class="Header">Jira Board</h1>
-    </div>
-    <div class="my-class font-italic">
-      <button type="button" class="btn btn-primary" data-bs-toggle="button"
-      autocomplete="off" (click)="onAdd()">Add List</button>
-      <div *ngIf="addNewBox">
-        <input type="text" [(ngModel)]="statusText">
-        <button type="button" class="btn btn-primary" (click)="addStatus()">Add</button>
-      </div>
-      <button type="button" class="btn btn-primary"  (click)="onSave()">save</button>
+    <button type="button" class="btn btn-primary" (click)="onSave()">save</button>
 
     <div class="board">
       <div class="board-bar">
@@ -49,20 +24,24 @@
               <hr>
             </div>
 
-            <div class="tasks-container"
-            cdkDropList
-            [cdkDropListData]="column.tasks"
-            (cdkDropListDropped)="drop($event)">
+            <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks"
+              (cdkDropListDropped)="drop($event)">
               <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-                {{ item }}
+                <div>Name</div>
+                {{ item.name }}
+                <div>Descrption</div>
+                {{ item.description }}
               </div>
             </div>
             <div *ngIf="addNewTask && activeColumnIndex==i">
-              <input type="text" [(ngModel)]="taskText">
+              <label>Name</label>
+              <input type="text" [(ngModel)]="taskName">
+              <label>Description</label>
+              <input type="text" [(ngModel)]="taskDesc">
               <button type="button" class="btn btn-primary" (click)="onCreateTask(column)">Add New task</button>
             </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="button"
-                autocomplete="off" (click)="addTaskName(i)">+</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off"
+              (click)="addTaskName(i)">+</button>
           </div>
         </div>
       </div>

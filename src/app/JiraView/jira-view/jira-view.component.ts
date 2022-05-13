@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -6,6 +7,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
+import { TaskColumn } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-jira-view',
@@ -13,14 +15,15 @@ import { Column } from 'src/app/models/column.model';
   styleUrls: ['./jira-view.component.css'],
 })
 export class JiraViewComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
   statusText: string | undefined;
 
   addNewBox: boolean = false;
 
   addNewTask: boolean = false;
-  taskText: string | undefined;
+  taskName: string = '';
+  taskDesc: string = '';
 
   activeColumnIndex: number = 0;
   dynamicBoard: Board = new Board('Test Board', []);
@@ -28,7 +31,7 @@ export class JiraViewComponent implements OnInit {
   ngOnInit() {
     let temp = localStorage.getItem('userinfo');
 
-    let val = JSON.parse(localStorage.getItem('userinfo') || '{}');
+    let val = JSON.parse(localStorage.getItem('userinfo') || '[]');
     console.log(val);
     let len = JSON.parse(val).columns.length;
     if (temp != null) {
@@ -42,7 +45,7 @@ export class JiraViewComponent implements OnInit {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<TaskColumn[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -80,15 +83,21 @@ export class JiraViewComponent implements OnInit {
   onCreateTask(updateColumn: Column) {
     console.log(updateColumn);
     this.addNewTask = false;
-    if (this.taskText) updateColumn.tasks.push(this.taskText);
-    this.taskText = '';
+
+    let newTask: TaskColumn = {
+      name: this.taskName,
+      description: this.taskDesc,
+    }
+    updateColumn.tasks.push(newTask);
+    this.taskName = '';
+    this.taskDesc = '';
   }
   addTaskName(activeIndex: number) {
     this.addNewTask = true;
     this.activeColumnIndex = activeIndex;
   }
 
-  onSave(){
+  onSave() {
     const jsonData = JSON.stringify(this.dynamicBoard);
     localStorage.setItem('userinfo', JSON.stringify(jsonData));
     console.log(jsonData);
