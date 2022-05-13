@@ -16,38 +16,32 @@ export class JiraViewComponent implements OnInit {
 
   addNewBox: boolean= false;
 
-  addColumn: Column = {
-    name: '',
-    tasks: []
-  };
   addNewTask: boolean= false;
   taskText: string | undefined;
 
   activeColumnIndex: number =0;
   dynamicBoard: Board = new Board('Test Board',[]);
 
-  // board: Board = new Board('Test Board', [
-  //   new Column('Todo', [
-  //     'Get to work',
-  //     'Pick up groceries',
-  //     'Go home',
-  //     'Fall asleep'
-  //   ]),
-  //   new Column('In Progress', [
-  //     "Going to work",
-  //     "foo",
-  //     "This was in the 'Research' column"
-  //   ]),
-  //   new Column('Done', [
-  //     'Get up',
-  //     'Brush teeth',
-  //     'Take a shower',
-  //     'Check e-mail',
-  //     'Walk dog'
-  //   ])
-  // ]);
-
   ngOnInit() {
+
+    let temp= localStorage.getItem('userinfo');
+
+
+    let val= JSON.parse(localStorage.getItem('userinfo') || '{}');
+    // let taskArray= JSON.parse(localStorage.getItem('userData') || '{}');
+    console.log(val);
+    let len= JSON.parse(val).columns.length;
+    if(temp!= null){
+      for(let i=0; i<len; i++)
+      {
+      let newColumn: Column= {
+        name: JSON.parse(val).columns[i].name,
+        tasks:[],
+    }
+      if(this.dynamicBoard)
+      this.dynamicBoard.columns.push(newColumn);
+    }
+  }
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -79,21 +73,27 @@ export class JiraViewComponent implements OnInit {
     }
     console.log(this.dynamicBoard);
     this.statusText="";
+    const jsonData = JSON.stringify(this.dynamicBoard)
+    localStorage.setItem('userinfo', JSON.stringify(jsonData))
   }
 
   onCreateTask(updateColumn : Column){
+
   console.log(updateColumn);
    this.addNewTask=false;
    if(this.taskText)
    updateColumn.tasks.push(this.taskText);
    this.taskText="";
+   const jsonData = JSON.stringify(updateColumn)
+    localStorage.setItem('userData', JSON.stringify(jsonData))
+
   }
   addTaskName(activeIndex: number){
     this.addNewTask=true;
   this.activeColumnIndex= activeIndex;
 
-
   }
+
 }
 
 
