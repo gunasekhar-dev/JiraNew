@@ -9,6 +9,8 @@
       <input type="text" [(ngModel)]="statusText">
       <button type="button" class="btn btn-primary" (click)="addStatus()">Add</button>
     </div>
+    <br>
+    <br>
     <button type="button" class="btn btn-primary" (click)="onSave()">save</button>
 
     <div class="board">
@@ -27,14 +29,14 @@
             <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks"
               (cdkDropListDropped)="drop($event)">
               <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-                <div>Name</div>
+                <div class="Bold">Name</div>
                 {{ item.name }}
-                <div>Descrption</div>
+                <div class="Bold">Descrption</div>
                 {{ item.description }}
               </div>
             </div>
             <div *ngIf="addNewTask && activeColumnIndex==i">
-              <label>Name</label>
+              <label >Name</label>
               <input type="text" [(ngModel)]="taskName">
               <label>Description</label>
               <input type="text" [(ngModel)]="taskDesc">

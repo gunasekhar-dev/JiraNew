@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { JiraViewComponent } from './JiraView/jira-view/jira-view.component';
-import { ProgressComponent } from './JiraView/jira-view/progressBox/progress/progress.component';
 
 const routes: Routes = [
   {
@@ -11,10 +10,6 @@ const routes: Routes = [
   {
     path: 'jira',
     component: JiraViewComponent,
-  },
-  {
-    path: 'progress',
-    component: ProgressComponent,
   },
 ];
 
