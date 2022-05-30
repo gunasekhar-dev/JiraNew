@@ -3,8 +3,8 @@
     <h1 class="Header">Jira Board</h1>
   </div>
   <div class="my-class font-italic">
-    <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" (click)="onAdd()">Add
-      List</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off"
+    (click)="onAdd()">Add List</button>
     <div *ngIf="addNewBox">
       <input type="text" [(ngModel)]="statusText">
       <button type="button" class="btn btn-primary" (click)="addStatus()">Add</button>
@@ -14,9 +14,6 @@
     <button type="button" class="btn btn-primary" (click)="onSave()">save</button>
 
     <div class="board">
-      <div class="board-bar">
-        <p class="board-name">{{ dynamicBoard?.name }}</p>
-      </div>
       <div class="board-wrapper">
         <div class="board-columns" cdkDropListGroup>
           <div class="board-column" *ngFor="let column of dynamicBoard?.columns ; let i=index">
@@ -49,3 +46,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -40,7 +40,8 @@ export class JiraViewComponent implements OnInit {
           name: JSON.parse(val).columns[i].name,
           tasks: JSON.parse(val).columns[i].tasks,
         };
-        if (this.dynamicBoard) this.dynamicBoard.columns.push(newColumn);
+        if (this.dynamicBoard)
+        this.dynamicBoard.columns.push(newColumn);
       }
     }
   }
@@ -74,7 +75,8 @@ export class JiraViewComponent implements OnInit {
         name: this.statusText,
         tasks: [],
       };
-      if (this.dynamicBoard) this.dynamicBoard.columns.push(newColumn);
+      if (this.dynamicBoard)
+      this.dynamicBoard.columns.push(newColumn);
     }
     console.log(this.dynamicBoard);
     this.statusText = '';
